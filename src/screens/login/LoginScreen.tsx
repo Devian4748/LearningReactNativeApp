@@ -1,4 +1,4 @@
-import React, {Profiler} from 'react';
+import React, { Profiler } from 'react';
 import {
   View,
   StyleSheet,
@@ -6,9 +6,10 @@ import {
   Image,
   SafeAreaView,
   Platform,
+  Pressable
 } from 'react-native';
 import Swiper from 'react-native-swiper';
-import {youtubeLogoImage, kungFuPandaImage, globalImage} from './assets';
+import { youtubeLogoImage, kungFuPandaImage, globalImage } from './assets';
 const LoginScreen = () => {
   const onRenderCallback = (id: string, phase: string) => {
     console.log(id, phase);
@@ -16,7 +17,7 @@ const LoginScreen = () => {
   return (
     <Profiler id="login_screen" onRender={onRenderCallback}>
       <SafeAreaView style={styles.container}>
-        <Swiper>
+        <Swiper loop={false} dotStyle={styles.dot} activeDotStyle={styles.activeDot}>
           <View style={styles.slider}>
             <Image style={styles.image} source={youtubeLogoImage} />
             <Text style={styles.title}>Welcome to Movie App</Text>
@@ -30,6 +31,9 @@ const LoginScreen = () => {
             <Text style={styles.title}>Watch Anywhere, Anytime</Text>
           </View>
         </Swiper>
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>Login</Text>
+        </Pressable>
       </SafeAreaView>
     </Profiler>
   );
@@ -43,21 +47,41 @@ const styles = StyleSheet.create({
   },
   slider: {
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
+    gap: 50,
     backgroundColor: '#000',
   },
   image: {
     width: 300,
     height: 300,
     resizeMode: 'contain',
-    marginTop: 100,
   },
   title: {
     color: '#fff',
     fontSize: 32,
     fontWeight: 'bold',
-    marginTop: 50,
     textAlign: 'center',
+  },
+  dot: {
+    backgroundColor: '#ccc'
+  },
+  activeDot: {
+    backgroundColor: '#f00'
+  },
+  button: {
+    width: '100%',
+    backgroundColor: '#f00',
+    borderRadius: 8,
+    paddingVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
