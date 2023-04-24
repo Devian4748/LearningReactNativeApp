@@ -1,4 +1,4 @@
-import React, { Profiler } from 'react';
+import React, {Profiler} from 'react';
 import {
   View,
   StyleSheet,
@@ -6,18 +6,36 @@ import {
   Image,
   SafeAreaView,
   Platform,
-  Pressable
 } from 'react-native';
+import Button from '../../components/Button';
 import Swiper from 'react-native-swiper';
-import { youtubeLogoImage, kungFuPandaImage, globalImage } from './assets';
-const LoginScreen = () => {
+import {youtubeLogoImage, kungFuPandaImage, globalImage} from './assets';
+import {NavigationProp} from '@react-navigation/native';
+import {SCREENS} from './screenNames';
+type SignInScreenProps = {
+  navigation: NavigationProp<
+    Record<string, object | undefined>,
+    string,
+    any,
+    any,
+    any
+  >;
+};
+
+const SignInScreen = ({navigation}: SignInScreenProps) => {
   const onRenderCallback = (id: string, phase: string) => {
     console.log(id, phase);
   };
+  const handleSignInPress = async () => {
+    navigation.navigate(SCREENS.AUTH);
+  };
   return (
-    <Profiler id="login_screen" onRender={onRenderCallback}>
+    <Profiler id="sign_in_screen" onRender={onRenderCallback}>
       <SafeAreaView style={styles.container}>
-        <Swiper loop={false} dotStyle={styles.dot} activeDotStyle={styles.activeDot}>
+        <Swiper
+          loop={false}
+          dotStyle={styles.dot}
+          activeDotStyle={styles.activeDot}>
           <View style={styles.slider}>
             <Image style={styles.image} source={youtubeLogoImage} />
             <Text style={styles.title}>Welcome to Movie App</Text>
@@ -31,9 +49,7 @@ const LoginScreen = () => {
             <Text style={styles.title}>Watch Anywhere, Anytime</Text>
           </View>
         </Swiper>
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
-        </Pressable>
+        <Button label="Sign In" onPress={handleSignInPress} />
       </SafeAreaView>
     </Profiler>
   );
@@ -64,25 +80,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   dot: {
-    backgroundColor: '#ccc'
+    backgroundColor: '#ccc',
   },
   activeDot: {
-    backgroundColor: '#f00'
-  },
-  button: {
-    width: '100%',
     backgroundColor: '#f00',
-    borderRadius: 8,
-    paddingVertical: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
   },
 });
 
-export default LoginScreen;
+export default SignInScreen;
