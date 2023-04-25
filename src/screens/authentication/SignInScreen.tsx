@@ -1,17 +1,12 @@
 import React, {Profiler} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  SafeAreaView,
-  Platform,
-} from 'react-native';
+import {View, StyleSheet, Text, Image} from 'react-native';
 import Button from '../../components/Button';
 import Swiper from 'react-native-swiper';
 import {youtubeLogoImage, kungFuPandaImage, globalImage} from './assets';
 import {NavigationProp} from '@react-navigation/native';
 import {SCREENS} from './screenNames';
+import Wrapper from '../../components/Wrapper';
+
 type SignInScreenProps = {
   navigation: NavigationProp<
     Record<string, object | undefined>,
@@ -31,7 +26,7 @@ const SignInScreen = ({navigation}: SignInScreenProps) => {
   };
   return (
     <Profiler id="sign_in_screen" onRender={onRenderCallback}>
-      <SafeAreaView style={styles.container}>
+      <Wrapper>
         <Swiper
           loop={false}
           dotStyle={styles.dot}
@@ -50,17 +45,12 @@ const SignInScreen = ({navigation}: SignInScreenProps) => {
           </View>
         </Swiper>
         <Button label="Sign In" onPress={handleSignInPress} />
-      </SafeAreaView>
+      </Wrapper>
     </Profiler>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    paddingTop: Platform.OS === 'android' ? 25 : 0, // add extra padding on Android
-  },
   slider: {
     flex: 1,
     justifyContent: 'center',

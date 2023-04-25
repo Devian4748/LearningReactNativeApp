@@ -1,15 +1,7 @@
 import React, {Profiler} from 'react';
-import {StatusBar} from 'react-native';
-import {
-  AUTHENTICATION_SCREENS,
-  SignInScreen,
-  AuthScreen,
-} from './src/screens/authentication';
+import {StatusBar, SafeAreaView, StyleSheet, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-const Stack = createNativeStackNavigator();
-
+import AppNavigator from './src/navigation/AppNavigator';
 const App = () => {
   const onRenderCallback = (id: string, phase: string) => {
     console.log(id, phase);
@@ -18,20 +10,21 @@ const App = () => {
   return (
     <Profiler id="app" onRender={onRenderCallback}>
       <StatusBar barStyle="light-content" />
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen
-            name={AUTHENTICATION_SCREENS.SIGN_IN}
-            component={SignInScreen}
-          />
-          <Stack.Screen
-            name={AUTHENTICATION_SCREENS.AUTH}
-            component={AuthScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SafeAreaView style={styles.container}>
+        <NavigationContainer>
+          <AppNavigator />
+        </NavigationContainer>
+      </SafeAreaView>
     </Profiler>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+    paddingTop: Platform.OS === 'android' ? 25 : 0, // add extra padding on Android
+  },
+});

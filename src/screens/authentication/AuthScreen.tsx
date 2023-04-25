@@ -1,6 +1,8 @@
 import {Profiler} from 'react';
 import {View, TextInput, Text} from 'react-native';
 import Button from '../../components/Button';
+import Wrapper from '../../components/Wrapper';
+
 const AuthScreen = () => {
   const onRenderCallback = (id: string, phase: string) => {
     console.log(id, phase);
@@ -10,7 +12,7 @@ const AuthScreen = () => {
   };
   return (
     <Profiler id="auth_screen" onRender={onRenderCallback}>
-      <View>
+      <Wrapper>
         <View>
           <TextInput />
         </View>
@@ -20,7 +22,7 @@ const AuthScreen = () => {
         <View>
           <Button label="Sign In" onPress={handleSignInPress} />
         </View>
-      </View>
+      </Wrapper>
     </Profiler>
   );
 };
