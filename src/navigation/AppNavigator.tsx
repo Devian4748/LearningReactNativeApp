@@ -15,7 +15,17 @@ const AppNavigator = () => {
         component={SignInScreen}
         options={{headerShown: false}}
       />
-      <Stack.Screen name={AUTHENTICATION_SCREENS.AUTH} component={AuthScreen} />
+      <Stack.Screen
+        name={AUTHENTICATION_SCREENS.AUTH}
+        component={AuthScreen}
+        options={{
+          title: 'Sign In',
+          headerStyle: {
+            backgroundColor: '#000',
+          },
+          headerTintColor: '#fff',
+        }}
+      />
     </Stack.Navigator>
   );
 };

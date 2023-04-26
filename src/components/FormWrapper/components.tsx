@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, Platform} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Keyboard,
+} from 'react-native';
 import Props from './type';
 
 const Component = ({children, type = 'default'}: Props) => {
@@ -8,7 +15,18 @@ const Component = ({children, type = 'default'}: Props) => {
     ...(type === 'gray' && styles.containerGray),
     ...(type === 'white' && styles.containerWhite),
   };
-  return <View style={containerStyle}>{children}</View>;
+  return (
+    <View style={containerStyle}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior="padding"
+          enabled>
+          {children}
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
