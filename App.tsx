@@ -1,7 +1,7 @@
 import React, {Profiler} from 'react';
 import {StatusBar, SafeAreaView, StyleSheet, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import AppNavigator from './src/navigation/AppNavigator';
+import AuthNavigator from './src/navigation/AuthNavigator';
 const App = () => {
   const onRenderCallback = (id: string, phase: string) => {
     console.log(id, phase);
@@ -12,7 +12,7 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={styles.container}>
         <NavigationContainer>
-          <AppNavigator />
+          <AuthNavigator />
         </NavigationContainer>
       </SafeAreaView>
     </Profiler>

@@ -4,17 +4,18 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Keyboard,
+  Platform,
 } from 'react-native';
 import Props from './type';
 import Wrapper from '../Wrapper';
-const Component = ({children, type = 'default'}: Props) => {
+const Component = ({children}: Props) => {
   return (
     <Wrapper>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           style={styles.container}
-          behavior="padding"
-          enabled>
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={50}>
           {children}
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
