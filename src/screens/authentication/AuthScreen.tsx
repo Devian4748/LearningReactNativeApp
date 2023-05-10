@@ -2,8 +2,21 @@ import {Profiler, useRef} from 'react';
 import {View, TextInput, StyleSheet, Text} from 'react-native';
 import Button from '../../components/Button';
 import FormWrapper from '../../components/FormWrapper';
+import {NavigationProp} from '@react-navigation/native';
+import {SCREENS} from './screenNames';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const AuthScreen = () => {
+type AuthScreenProp = {
+  navigation: NavigationProp<
+    Record<string, object | undefined>,
+    string,
+    any,
+    any,
+    any
+  >;
+};
+
+const AuthScreen = ({navigation}: AuthScreenProp) => {
   const emailPhoneInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
@@ -12,7 +25,8 @@ const AuthScreen = () => {
   };
 
   const handleSignInPress = async () => {
-    console.log('SIGN_IN');
+    await AsyncStorage.setItem('AUTH', 'TRUE');
+    navigation.navigate(SCREENS.PROFILER);
   };
 
   const handleNextPress = () => {
@@ -22,7 +36,7 @@ const AuthScreen = () => {
   return (
     <Profiler id="auth_screen" onRender={onRenderCallback}>
       <FormWrapper>
-        <View style={styles.formContainer}>
+        <View style={styles.container}>
           <View>
             {/* View 로 감싸지 않으면 Keyboard 가 올라왔을 때, 부자연스러운 현상이 발생함 */}
             <Text style={styles.title}>WATCH MOVIE</Text>
@@ -52,9 +66,6 @@ const AuthScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  formContainer: {
     flex: 1,
     justifyContent: 'center',
     gap: 25,

@@ -1,8 +1,10 @@
-import React, {Profiler} from 'react';
+import React, {Profiler, useEffect, useState} from 'react';
 import {StatusBar, SafeAreaView, StyleSheet, Platform} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthNavigator from './src/navigation/AuthNavigator';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const App = () => {
+  const [auth, setAuth] = useState(false);
   const onRenderCallback = (id: string, phase: string) => {
     console.log(id, phase);
   };

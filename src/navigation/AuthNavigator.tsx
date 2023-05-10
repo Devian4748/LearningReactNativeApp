@@ -2,6 +2,7 @@ import {
   AUTHENTICATION_SCREENS,
   SignInScreen,
   AuthScreen,
+  ProfilerScreen,
 } from '../screens/authentication';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -25,6 +26,11 @@ const AuthNavigator = () => {
           },
           headerTintColor: '#fff',
         }}
+      />
+      <Stack.Screen
+        name={AUTHENTICATION_SCREENS.PROFILER}
+        component={ProfilerScreen}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

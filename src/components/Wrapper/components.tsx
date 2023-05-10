@@ -14,6 +14,7 @@ const Component = ({children, type = 'default'}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     backgroundColor: '#000',
     paddingTop: Platform.OS === 'android' ? 25 : 0, // add extra padding on Android
   },
